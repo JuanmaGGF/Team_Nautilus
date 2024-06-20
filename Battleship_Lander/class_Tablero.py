@@ -1,7 +1,5 @@
-# Bibliotecas de terceros
 import numpy as np
 
-# Módulos propios
 from class_Barco import Barco
 from variables import BARCOS, DIMENSION_TABLERO
 
