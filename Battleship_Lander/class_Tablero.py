@@ -30,6 +30,7 @@ class Tablero:
         pass
     
     def colocar_barco(self):
+        '''¿o un método de la clase Barco?'''
         pass
     
     def disparar(self):
