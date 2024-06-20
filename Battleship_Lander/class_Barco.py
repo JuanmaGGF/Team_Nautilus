@@ -22,9 +22,8 @@ class Barco:
 
     def inicializar_barcos(self):
         barcos = {}
-
-        for nombre_barco in BARCOS.keys():
-            for eslora, cantidad in BARCOS[nombre_barco]:
+        for (barco,(eslora, cantidad)) in BARCOS.items():
+            for _ in range(cantidad): 
                 posicionar_barco() # type: ignore
                 # Crea un diccionario (o lista; aún por definir) de objetos Barco
 
