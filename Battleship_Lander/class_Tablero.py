@@ -17,7 +17,7 @@ class Tablero:
         self.jugador_id = jugador_id
         self.tablero = np.full((DIMENSION_TABLERO, DIMENSION_TABLERO), ' ')
         self.barcos = {}
-        self.inicializar_barcos() # posiciona todos los barcos, de forma aleatoria
+        self.inicializar_barcos() # posiciona todos los barcos de forma aleatoria
     
     def inicializar_barcos(self):
         '''
