@@ -1,7 +1,5 @@
-# Bibliotecas de terceros
-import numpy as np      # No creo que haga falta importarlo aquí
+import numpy as np
 
-# Módulos propios
 from class_Tablero import Tablero
 
 def juego():
@@ -14,11 +12,12 @@ def juego():
     tablero_maquina = Tablero(jugador_id = 'Maquina')
     print(tablero_maquina.tablero)
 
-
 if __name__ == "__main__":
     juego()  
 
 
+
+# PSEUDO-CÓDIGO DE FUNCIONAMIENTO
 '''
 ### El siguiente pseudo-código es la intención principal del programa
 def juego():
