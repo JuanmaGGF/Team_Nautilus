@@ -5,6 +5,9 @@ import numpy as np      # No creo que haga falta importarlo aquí
 from class_Tablero import Tablero
 
 def juego():
+    '''
+    Función principal del juego
+    '''
     tablero_jugador = Tablero(jugador_id = 'Jugador')
     print(tablero_jugador.tablero)
     
