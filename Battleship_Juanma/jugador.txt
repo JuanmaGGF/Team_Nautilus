@@ -1,0 +1,29 @@
+jugador
+
+constructor
+1) define si el jugador es maquina o persona por medio del nombre y un argumento "maquina = True" o "maquina = False"
+2) ejecuta metodo id
+3) guarda en maquina el valor True o False
+4) crea un tablero nuevo(pasandole el id del jugador) y se lo asigna al jugador
+
+metodo id:
+1.a) si es hombre pregunta al jugador su nombre y lo asigna a su nombre
+1.b) si no es hombre asigna "CPU" al nombre
+
+metodo comprobar_coordenada
+1) comprueba si la coordenada está en las dimensiones
+2.a) si está dentro devuelve True
+2.b) si no está dentro devuelve False
+
+metodo coordenada
+1) Comprueba si jugador_dispara es hombre
+	1.a) si es hombre pide la coordenada
+		1.a.1) entra a comprobar_coordenada
+	1.b) si es CPU la calcula con un random
+		1.b.1) entra a comprobar_coordenada
+2) devuelve la coordenada
+
+metodo disparar(argumentos: jugador_disparado,coordenada):
+1) llama a metodo_disparar del tablero de jugador_dispara(envia como argumento tablero jugador_disparado)
+
+
