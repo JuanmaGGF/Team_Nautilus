@@ -1,0 +1,13 @@
+main
+
+1) crea un jugador1 con "maquina=False"
+2) crea un jugador2 con "maquina=True" (será la computadora)
+3) abro un bucle while y repito esto todo el rato:
+	3.1) entramos a jugador1.coordenada y la guardo en coordenada1
+	3.2) entramos a jugador2.coordenada y la guardo en coordenada2
+	3.3.a) si el jugador 1 introduce en coordenada1 un caracter o palabra especial para dejar de jugar:
+		3.3.a) imprimo "finalizado a peticion del jugador"
+		3.3.b) hacemos break del while y paramos todo
+	3.3.b) si no es ese caracter de parada y mete una coordenada
+		3.3.b.1) entramos en jugador1.metodo_disparar(jugador2,coordenada1)
+		3.3.b.2) entramos en jugador2.metodo_disparar(jugador1,coordenada2)

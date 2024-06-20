@@ -1,0 +1,58 @@
+tablero
+
+constructor:
+1) asigna el id del jugador al tablero
+2) asigna dimensiones al tablero(es inmutable así que sería una tupla)
+3) inicializa un diccionario de barcos con los barcos que tenemos colocados(recibidos al crear el tablero)
+4) crea barcos_propios = un numpy para barcos
+5) crea barcos_ajenos = un numpy para barcos de la computadora
+6) Inicializa pos brd
+7) Inicializa celdas_tocadas (cantidad de X en barcos_propios)  (más facil contar el total de X hasta que sea 0 y no tener que volver a contarlos otra vez cada vez)
+
+metodo esta_fuera:
+1) para cada coordenada del barco pasado
+	1.a) comprueba si esta fuera del tablero
+		1.a.1) si es asi devuelve True
+2) si no es asi devuelve False
+	
+metodo interfiere:
+1) para cada celda del barco
+	1.a) para cada barco del diccionario de barcos
+		1.a.1) comprueba si la coordenad esta en el barco
+			1.a.1.a) si es asi envía True
+2) si no es asi devuelve False
+
+metodo inicializa:
+1) Para cada barco
+	1.a) comprueba si se sale del tablero con metodo está_fuera. si es así da error
+	1.b) comprueba si interfiere con otro con método inferfiere. si es así envia error
+	1.c) mete el barco en barcos_propios.
+	1.d) imprime barcos_propios y barcos_ajenos
+
+metodo actualiza_tablero:
+1) Coloca cada barco con su situacion actual. (No tiene que comprobar si se sale o interfiere por que solo cambia de "O" a "X")
+
+metodo comprueba_estado_juego:
+1) si celdas_tocadas=0 fin
+2) Imprime ganador del juego
+
+metodo recibir_disparo:
+1) Para la coord
+	1.a) Llama al metodo esta_fuera de brd y si esta devuelve "Fuera de rango"
+	1.b) Si no está fuera, para cada barco del diccionario
+		1.b.1) LLama al metodo tocado_hundido del barco con la coord
+		1.b.2) Si es True:
+			1.b.2.a) Reduce celdas_tocadas en 1
+			1.b.2.b) llama a comprueba_estado_juego
+			1.b.2.c) Devuelve "X"
+		1.b.3) Si no
+			1.b.3.a) Devuelve "-"
+
+metodo_disparar
+1) Para la coordenada
+	1.a) Llama a recibir_disparo del jugador con la coordenada
+	1.b) actualiza barcos_ajenos con el resultado en la coordenada
+	1.c) Imprime barcos_propios y barcos_ajenos
+
+
+
