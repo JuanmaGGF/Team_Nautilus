@@ -1,16 +1,34 @@
 import numpy as np
 
 from class_Tablero import Tablero
+from funciones import solicitar_coordenadas
 
 def juego():
     '''
     Función principal del juego
     '''
-    tablero_jugador = Tablero(jugador_id = 'Jugador')
-    print(tablero_jugador.tablero)
     
-    tablero_maquina = Tablero(jugador_id = 'Maquina')
-    print(tablero_maquina.tablero)
+    print('\n ~~~~ Bienvenidx a Hundir la Flota ~~~~ \n')
+    print('Escriba "exit" en cualquier momento para terminar el juego\n') # ¿Añadir instrucciones simples del juego?
+    
+    tablero_jugador = Tablero(jugador_id = 'Jugador') 
+    tablero_maquina = Tablero(jugador_id = 'Máquina')
+
+    juego_terminado = False
+    turno_jugador = True
+    
+    # print(tablero_jugador)
+    # print(type(tablero_jugador.tablero))
+    
+    while not juego_terminado:
+        if turno_jugador:
+            tablero_jugador.mostrar_tableros(tablero_maquina, ocultar_barcos = False) # ocultar_barcos = False de momento para ver como va la partida
+            coordenadas = solicitar_coordenadas(),
+            tablero_jugador.disparar(tablero_maquina, coordenadas)
+            break
+
+
+
 
 if __name__ == "__main__":
     juego()  

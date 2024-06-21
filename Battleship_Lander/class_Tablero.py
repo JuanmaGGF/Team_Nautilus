@@ -4,6 +4,7 @@ from class_Barco import Barco
 from variables import BARCOS, DIMENSION_TABLERO
 
 class Tablero:
+       
         
     def __init__(self, jugador_id):
         '''
@@ -16,6 +17,7 @@ class Tablero:
         self.tablero = np.full((DIMENSION_TABLERO, DIMENSION_TABLERO), ' ')
         self.barcos = {}
         self.inicializar_barcos() # posiciona todos los barcos de forma aleatoria
+    
     
     def inicializar_barcos(self):
         '''
@@ -33,19 +35,27 @@ class Tablero:
                         id_barco = f'{nombre}_{str(num_barco)}'
                         self.barcos[id_barco] = Barco(id_barco, fila, columna, eslora, orientacion)
                         colocado = True
-                            
-    def _ubicar_barco(self, fila, columna, eslora, orientacion):
+
+
+    def mostrar_tableros(self, tablero_oponente, *, ocultar_barcos = True):
         '''
-        ### Método privado ###
-        Ubica en el tablero la posición de un barco: pinta "O" en las posiciones que ocupe en barco.
+        Muestra los dos tableros en paralelo.
+        Si "ocultar_barcos = True" esconde los barcos del "tablero_oponente". Es decir cambiar 'O' (barco) por ' ' (agua)
         '''
-        if orientacion == 'H':
-            for i in range(eslora):
-                self.tablero[fila, columna + i] = 'O'
+        jugador_oponente = tablero_oponente.jugador_id
+        
+        if ocultar_barcos:
+            tablero_oponente = np.where(tablero_oponente.tablero == 'O', ' ', tablero_oponente.tablero)
         else:
-            for i in range(eslora):
-                self.tablero[fila + i, columna] = 'O'
-    
+            tablero_oponente = tablero_oponente.tablero
+        
+        #print(self.jugador_id, ':', '\t'*5, jugador_oponente, ':')   
+        print(f'{self.jugador_id}:{'\t'*5} {jugador_oponente}:\n')            
+         
+        for fila in range(DIMENSION_TABLERO):
+            print(self.tablero[fila], '\t', tablero_oponente[fila])
+     
+     
     def _posicion_valida(self, fila, columna, eslora, orientacion):
         '''
         ### Método privado ###
@@ -66,18 +76,36 @@ class Tablero:
             for i in range(eslora):
                 if self.tablero[fila + i, columna] != ' ':
                     return False
-        return True    
-    
-    def disparar(self):
+        return True        
+      
+                       
+    def _ubicar_barco(self, fila, columna, eslora, orientacion):
         '''
-        Si acierta llamara al método Barco.recibir_impacto
+        ### Método privado ###
+        Ubica en el tablero la posición de un barco: pinta "O" en las posiciones que ocupe en barco.
+        '''
+        if orientacion == 'H':
+            for i in range(eslora):
+                self.tablero[fila, columna + i] = 'O'
+        else:
+            for i in range(eslora):
+                self.tablero[fila + i, columna] = 'O'
+    
+    
+    def disparar(self, tablero_oponente, coordenadas):
+        '''
+        Probablemente llamará a "_recibir disparo" y a _tocado_hundido
         '''
         pass
     
-    def mostrar_tablero(self, jugador_id):
+    def _recibir_disparo(self, coordenadas):
         '''
-        ¿Un print bastará?
-        Puede tener un argumento de entrada para en función de quién este jugando mostrar los barcos u ocultarlos
-        jugador_id podría ser una variable booleana según sea humano o máquina el jugador
+        ### Método privado ###
         '''
         pass
+
+    def _tocado_hundido(self):
+        '''
+        ### Método privado ###
+        '''
+                    
