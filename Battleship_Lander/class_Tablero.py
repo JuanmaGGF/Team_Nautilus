@@ -8,20 +8,21 @@ class Tablero:
         
     def __init__(self, jugador_id):
         '''
-        1) Asigna el id del jugador al tablero
-        2) Asigna dimensiones al tablero (inmutable) y lo inicia con agua (' ')
-        3) Inicializa un diccionario de barcos para el tablero
-        4) Posiciona los barcos en el tablero llamando al método Tablero.inicializar_barcos()
+        1: Asigna el id del jugador al tablero
+        2: Asigna dimensiones al tablero (inmutable) y lo inicia con agua (' ')
+        3: Inicializa un diccionario de barcos para el tablero
+        4: Posiciona los barcos en el tablero llamando al método Tablero.inicializar_barcos()
         '''
         self.jugador_id = jugador_id
         self.tablero = np.full((DIMENSION_TABLERO, DIMENSION_TABLERO), ' ')
+        self.dimension = DIMENSION_TABLERO
         self.barcos = {}
-        self.inicializar_barcos() # posiciona todos los barcos de forma aleatoria
+        self.inicializar_barcos()
     
     
     def inicializar_barcos(self):
         '''
-        Inicializa y posiciona los barcos definidos en la variable global "BARCOS"
+        Inicializa y posiciona los barcos definidos en la variable global "BARCOS" de forma aleatoria
         '''
         for (nombre, (eslora, cantidad)) in BARCOS.items():
             for num_barco in range(cantidad):
@@ -30,7 +31,7 @@ class Tablero:
                     fila = np.random.randint(0, DIMENSION_TABLERO)
                     columna = np.random.randint(0, DIMENSION_TABLERO)
                     orientacion = np.random.choice(['H', 'V'])
-                    if self._posicion_valida(fila, columna, eslora, orientacion):
+                    if self._posicion_barco_valida(fila, columna, eslora, orientacion):
                         self._ubicar_barco(fila, columna, eslora, orientacion)
                         id_barco = f'{nombre}_{str(num_barco)}'
                         self.barcos[id_barco] = Barco(id_barco, fila, columna, eslora, orientacion)
@@ -56,7 +57,7 @@ class Tablero:
             print(self.tablero[fila], '\t', tablero_oponente[fila])
      
      
-    def _posicion_valida(self, fila, columna, eslora, orientacion):
+    def _posicion_barco_valida(self, fila, columna, eslora, orientacion):
         '''
         ### Método privado ###
         Comprueba si el barco se puede ubicar en el tablero.
@@ -91,21 +92,51 @@ class Tablero:
             for i in range(eslora):
                 self.tablero[fila + i, columna] = 'O'
     
-    
-    def disparar(self, tablero_oponente, coordenadas):
-        '''
-        Probablemente llamará a "_recibir disparo" y a _tocado_hundido
-        '''
-        pass
-    
-    def _recibir_disparo(self, coordenadas):
-        '''
-        ### Método privado ###
-        '''
-        pass
 
-    def _tocado_hundido(self):
+    # ################# SIN TERMINAR #################
+    # Si es tocado tiene que avisar y restaRle un a vida al barco, pero me he dado cuenta de que los
+    # objetos barco no tienen guardadas todas las posiciones que ocupan. Solo la posición original
+    # Puede ser conveniente modificar la clase barco y el metodo _ubicar_barco para que retorne las posiciones del barco
+    def recibir_disparo(self, coordenadas):
+        '''
+        Sin terminar
+        '''
+        if self._coordenadas_validas(coordenadas):
+            if self.tablero[coordenadas] == 'O':
+                print('¡Tocado! --> Repite tirada.')
+                self.tablero[coordenadas] = 'X'
+
+                # Acciones si se acierta
+
+            elif self.tablero[coordenadas] == ' ':
+                print('Agua.')
+                self.tablero[coordenadas] = '-'
+            else:
+                print('Ya habías disparado a esa posición.')
+            
+    # ####### SIN TESTEAR #######
+    def _coordenadas_validas(self, coordenadas):
         '''
         ### Método privado ###
+        --> True si las coordenadas están dentro del tablero
+        --> False en cualquier otro caso
         '''
-                    
+        if coordenadas >= (0, 0) and coordenadas < (self.dimension, self.dimension):
+            return True
+        else:
+            print('Coordenada no válida o fuera de rango.')
+            return False
+                                                    
+
+
+    # def disparar(self, tablero_oponente, coordenadas):
+    #     '''
+    #     Probablemente llamará a "_recibir disparo" y a _tocado_hundido
+    #     '''
+    #     pass
+    
+    # def _recibir_disparo(self, coordenadas):
+    #     '''
+    #     ### Método privado ###
+    #     '''
+    #     pass
