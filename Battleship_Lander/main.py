@@ -24,10 +24,8 @@ def juego():
         if turno_jugador:
             tablero_jugador.mostrar_tableros(tablero_maquina, ocultar_barcos = False) # ocultar_barcos = False de momento para ver como va la partida
             coordenadas = solicitar_coordenadas(),
-            tablero_jugador.disparar(tablero_maquina, coordenadas)
+            tablero_maquina.recibir_disparo(coordenadas)
             break
-
-
 
 
 if __name__ == "__main__":
