@@ -23,17 +23,17 @@ class Tablero:
         '''
         Inicializa y posiciona los barcos definidos en la variable global "BARCOS"
         '''
-        for (nombre, (eslora, cantidad)) in BARCOS.items():
-            for num_barco in range(cantidad):
-                colocado = False
-                while not colocado:
-                    fila = np.random.randint(0, DIMENSION_TABLERO)
-                    columna = np.random.randint(0, DIMENSION_TABLERO)
-                    orientacion = np.random.choice(['H', 'V'])
-                    if self._posicion_valida(fila, columna, eslora, orientacion):
-                        self._ubicar_barco(fila, columna, eslora, orientacion)
-                        id_barco = f'{nombre}_{str(num_barco)}'
-                        self.barcos[id_barco] = Barco(id_barco, fila, columna, eslora, orientacion)
+        for (nombre, (eslora, cantidad)) in BARCOS.items():                         #Coge cada barco del diccionario
+            for num_barco in range(cantidad):                                       #Coge cada barco del total por tipo
+                colocado = False                                                    #Lo marca como colocado
+                while not colocado:             
+                    fila = np.random.randint(0, DIMENSION_TABLERO)                  #Coge un valor entre 0 y la dimension del tablero
+                    columna = np.random.randint(0, DIMENSION_TABLERO)               #Coge una columna entre 0 y la dimension del tablero
+                    orientacion = np.random.choice(['H', 'V'])                      #Escoge una orientacion
+                    if self._posicion_valida(fila, columna, eslora, orientacion):   #Comprueba si la posicion es valida
+                        self._ubicar_barco(fila, columna, eslora, orientacion)      #Coloca el barco
+                        id_barco = f'{nombre}_{str(num_barco)}'                     #Genera la identificacion del barco
+                        self.barcos[id_barco] = Barco(id_barco, fila, columna, eslora, orientacion) #Añade el barco a la lista de barcos
                         colocado = True
 
 
@@ -90,19 +90,49 @@ class Tablero:
         else:
             for i in range(eslora):
                 self.tablero[fila + i, columna] = 'O'
-    
-    
+
+
     def disparar(self, tablero_oponente, coordenadas):
         '''
         Probablemente llamará a "_recibir disparo" y a _tocado_hundido
         '''
-        pass
-    
+        #Revisamos si el disparo ha caido en algún barco
+        disparo_bueno = False   # Usado para saber si hemos dado a algun barco   
+        agua = False            # Usado para saber si hemos tirado al agua
+        for barco,valores in tablero_oponente.barcos.items():                           # Para cada barco miro si ya está la tirada en el tablero
+            if tablero_oponente.barcos[barco].tocado(coordenadas):
+                if tablero_oponente.tablero[coordenadas[0],coordenadas[1]] == "X":      # Si ha tocado y ya estaba no es tiro con exito ni agua
+                    disparo_bueno = False
+                    agua = False   
+                else:
+                    tablero_oponente.tablero[coordenadas[0],coordenadas[1]] = "X"       # Si ha tocado y no estaba es tiro con exito y no es agua
+                    disparo_bueno = True
+                    agua = False
+                break
+            else:
+                if tablero_oponente.tablero[coordenadas[0],coordenadas[1]] == "X":      # Si no ha tocado y ya estaba es tiro sin exito y no es agua
+                    disparo_bueno = False
+                    agua = False
+                else:
+                    tablero_oponente.tablero[coordenadas[0],coordenadas[1]] = "-"       # Si no ha tocado y no estaba es tiro sin exito y es agua
+                    disparo_bueno = False
+                    agua = True
+        if agua:
+            print("Agua !!")
+            print()
+        if disparo_bueno:   # Si el disparo ha tocado o hundido puede seguir el jugador y retorno True, si no retorno False
+            return True
+        else:
+            return False
+
+        
+        
     def _recibir_disparo(self, coordenadas):
         '''
         ### Método privado ###
         '''
         pass
+
 
     def _tocado_hundido(self):
         '''

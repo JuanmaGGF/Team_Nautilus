@@ -9,4 +9,5 @@ def solicitar_coordenadas(): # se puede hacer control de entrada y checkear que 
     if coordenadas_input == 'exit':
         sys.exit()
     coordenada_x, coordenada_y = coordenadas_input.split(',')
-    return (int(coordenada_x), int(coordenada_y))
+    coordenadas = [int(coordenada_x),int(coordenada_y)]
+    return coordenadas

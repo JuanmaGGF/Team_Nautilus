@@ -24,8 +24,10 @@ def juego():
         if turno_jugador:
             tablero_jugador.mostrar_tableros(tablero_maquina, ocultar_barcos = False) # ocultar_barcos = False de momento para ver como va la partida
             coordenadas = solicitar_coordenadas(),
-            tablero_maquina.recibir_disparo(coordenadas)
+            tablero_jugador.disparar(tablero_maquina, coordenadas)
             break
+
+
 
 
 if __name__ == "__main__":
@@ -34,13 +36,14 @@ if __name__ == "__main__":
 
 
 # PSEUDO-CÓDIGO DE FUNCIONAMIENTO
-# Resume las funciones principales del programa
 '''
+### El siguiente pseudo-código es la intención principal del programa
 def juego():
     
-    1. Dar bienvenida e instrucciones del juego
-    
-    2. Crear tablero para jugador y máquina
+    print('Bienvenido a Hundir la Flota')
+    print('Instrucciones del juego:') # Instrucciones simples del juego
+    tablero_jugador = Tablero(jugador_id = 'Jugador')
+    tablero_maquina = Tablero(jugador_id = 'Maquina')
 
     juego_terminado = False
     turno_jugador = True
@@ -57,5 +60,5 @@ def juego():
         else: # turno de la máquina
             
             Código similar al del 'Jugador' pero son métodos random
-                - NOTA: No puede disparar a casillas que ya ha disparado
+                - Nota: No puede disparar a casillas que ya ha disparado
 '''
