@@ -29,12 +29,12 @@ def juego():
             
             print(f'\n------------ Turno: {turno} ------------')
             
-            #coordenadas = solicitar_coordenadas()
+            coordenadas = solicitar_coordenadas()
             
             # --------------- Descomentar esta parte si se quiere hacer una partida automática ---------------
             # time.sleep(3)                                                                 # Dejamos 3 segundos para que la respuesta no sea inmediata
-            coordenadas = tuple(np.random.randint(0,tablero_maquina.dimension,2))         # Generamos el disparo random de para el jugador
-            print(f"El JUGADOR dispara a: ({str(coordenadas[0])},{str(coordenadas[1])})") # Indica el disparo
+            # coordenadas = tuple(np.random.randint(0,tablero_maquina.dimension,2))         # Generamos el disparo random de para el jugador
+            # print(f"El JUGADOR dispara a: ({str(coordenadas[0])},{str(coordenadas[1])})") # Indica el disparo
             # ------------------------------------------------------------------------------------------------
             
             turno_jugador = tablero_jugador.disparar(tablero_maquina, coordenadas)            
@@ -58,7 +58,7 @@ def juego():
             print(f'\n------------ TURNO: {turno}. ------------')
             print("Turno de la máquina. Pensando...")
             
-            #time.sleep(3)                                                                 # Dejamos 3 segundos para que la respuesta no sea inmediata
+            time.sleep(3)                                                                 # Dejamos 3 segundos para que la respuesta no sea inmediata
             coordenadas = tuple(np.random.randint(0,tablero_maquina.dimension,2))         # Generamos el disparo random de la máquina
             print(f"La máquina dispara a: ({str(coordenadas[0])},{str(coordenadas[1])})") # Indica el disparo
             
