@@ -11,13 +11,12 @@ def juego():
     '''
     
     print('\n ~~~~ Bienvenidx a Hundir la Flota ~~~~ \n')
-    print('Escriba "exit" en cualquier momento para terminar el juego\n') # ¿Añadir instrucciones simples del juego?
+    print('Escriba "exit" en cualquier momento para terminar el juego\n')
     
     tablero_jugador = Tablero(jugador_id = 'Jugador') 
     tablero_maquina = Tablero(jugador_id = 'Máquina')
 
     juego_terminado = False
-    
     
     # print(tablero_jugador)
     # print(type(tablero_jugador.tablero))
@@ -28,29 +27,36 @@ def juego():
         turno_maquina = True
         while turno_jugador:
             print()
-            print()
             coordenadas = solicitar_coordenadas()
             # if coordenadas == "exit":
             #     juego_terminado = True
             turno_jugador = tablero_jugador.disparar(tablero_maquina, coordenadas)  # Mostramos los tableros desde main para que salgan en el mismo orden siempre           
             if turno_jugador:
+                tablero_maquina.vidas_jugador -= 1
                 print("Acertaste, continua...")
                 print("\n\n") 
-
+            if tablero_maquina.vidas_jugador == 0:
+                print('FIN DE PARTIDA. Ganaste')
+                turno_jugador = False
+                turno_maquina = False
+                juego_terminado = True
             tablero_jugador.mostrar_tableros(tablero_maquina, ocultar_barcos = True)  
         while turno_maquina:
             print()
-            print()
-            print("Turno de la maquina, pensando...")
+            print("Turno de la máquina, pensando...")
             time.sleep(3)                                                                                       # Dejamos 3 segundos para no ser inmediato
-            coordenadas_maquina = np.random.randint(0,10,2)                                                     # Generamos el disparo de la máquina
-            print("La máquina dispara a: ["+str(coordenadas_maquina[0])+","+str(coordenadas_maquina[1])+"]")    # Indica el disparo
-            turno_maquina = tablero_maquina.disparar(tablero_jugador, coordenadas_maquina)                      # Realizamos el disparo de la máquina
+            coordenadas = np.random.randint(0,10,2)                                                     # Generamos el disparo de la máquina
+            print("La máquina dispara a: ["+str(coordenada[0])+","+str(coordenadas[1])+"]")    # Indica el disparo
+            turno_maquina = tablero_maquina.disparar(tablero_jugador, coordenadas)                      # Realizamos el disparo de la máquina
             if turno_maquina:
-                print("La maquina acerto, sigue ella...")                
-                print("\n\n")                                                
+                tablero_jugador.vidas_jugador -= 1
+                print("La maquina acertó, sigue ella...")                
+                print("\n\n")     
+            if tablero_jugador.vidas_jugador == 0:
+                print('FIN DE PARTIDA. Ganó la máquina.')
+                turno_maquina = False
+                juego_terminado = True                                           
             tablero_jugador.mostrar_tableros(tablero_maquina)                                                   # Mostramos los tableros desde main para que salgan en el mismo orden siempre           
-
 
 
 if __name__ == "__main__":

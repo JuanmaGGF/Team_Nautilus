@@ -1,7 +1,7 @@
 import numpy as np
 
 from class_Barco import Barco
-from variables import BARCOS, DIMENSION_TABLERO
+from variables import BARCOS, DIMENSION_TABLERO, VIDAS_JUGADOR
 
 class Tablero:
     
@@ -16,6 +16,7 @@ class Tablero:
         self.tablero = np.full((DIMENSION_TABLERO, DIMENSION_TABLERO), ' ')
         self.barcos = {}
         self.inicializar_barcos() # posiciona todos los barcos de forma aleatoria
+        self.vidas_jugador = VIDAS_JUGADOR
         
         self.material = 'madera'
         self.dimension = DIMENSION_TABLERO

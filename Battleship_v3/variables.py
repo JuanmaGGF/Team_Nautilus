@@ -7,12 +7,14 @@ BARCOS = {
     'Destructor'   : (1, 4)
     }
 
-VIDAS_JUGADOR = 0
-
-
 BARCOS = {
     'Portaaviones' : (3, 1),
     }
 
 # Dimension del tablero: (DIMENSION_TABLERO x DIMENSION_TABLERO)
 DIMENSION_TABLERO = 10
+
+# Vidas del jugador
+VIDAS_JUGADOR = 0
+for barco in BARCOS.keys():
+    VIDAS_JUGADOR += BARCOS[barco][0] * BARCOS[barco][1]
