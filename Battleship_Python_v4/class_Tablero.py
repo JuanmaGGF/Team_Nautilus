@@ -26,17 +26,17 @@ class Tablero:
         '''
         Inicializa y posiciona los barcos definidos en la variable global "BARCOS"
         '''
-        for (nombre, (eslora, cantidad)) in BARCOS.items():                         #Coge cada barco del diccionario
-            for num_barco in range(cantidad):                                       #Coge cada barco del total por tipo
-                colocado = False                                                    #Lo marca como no colocado
+        for (nombre, (eslora, cantidad)) in BARCOS.items():                         # Coge cada barco del diccionario
+            for num_barco in range(cantidad):                                       # Coge cada barco del total por tipo
+                colocado = False                                                    # Lo marca como no colocado
                 while not colocado:             
-                    fila = np.random.randint(0, DIMENSION_TABLERO)                  #Coge un valor entre 0 y la dimension del tablero
-                    columna = np.random.randint(0, DIMENSION_TABLERO)               #Coge una columna entre 0 y la dimension del tablero
-                    orientacion = np.random.choice(['H', 'V'])                      #Escoge una orientacion
-                    if self._posicion_valida(fila, columna, eslora, orientacion):   #Comprueba si la posicion es valida
-                        self._ubicar_barco(fila, columna, eslora, orientacion)      #Coloca el barco
-                        id_barco = f'{nombre}_{str(num_barco)}'                     #Genera la identificacion del barco
-                        self.barcos[id_barco] = Barco(id_barco, fila, columna, eslora, orientacion) #Añade el barco a la lista de barcos
+                    fila = np.random.randint(0, DIMENSION_TABLERO)                  # Coge un valor entre 0 y la dimension del tablero
+                    columna = np.random.randint(0, DIMENSION_TABLERO)               # Coge una columna entre 0 y la dimension del tablero
+                    orientacion = np.random.choice(['H', 'V'])                      # Escoge una orientacion
+                    if self._posicion_valida(fila, columna, eslora, orientacion):   # Comprueba si la posicion es valida
+                        self._ubicar_barco(fila, columna, eslora, orientacion)      # Coloca el barco
+                        id_barco = f'{nombre}_{str(num_barco)}'                     # Genera la identificacion del barco
+                        self.barcos[id_barco] = Barco(id_barco, fila, columna, eslora, orientacion) # Añade el barco al diccionario de barcos
                         colocado = True
 
 

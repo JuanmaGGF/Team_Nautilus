@@ -12,7 +12,7 @@ def solicitar_coordenadas(): # se puede hacer control de entrada y checkear que 
         if coordenadas_input == 'exit':
             sys.exit()
         coordenada_x, coordenada_y = coordenadas_input.split(',')
-        coordenadas = (int(coordenada_x),int(coordenada_y)) # lo he cambiado de lista a tupla
+        coordenadas = (int(coordenada_x), int(coordenada_y))  # tupla
         if (coordenadas >= (0, 0)) and  (coordenadas < (DIMENSION_TABLERO, DIMENSION_TABLERO)):
             return coordenadas     
         else:

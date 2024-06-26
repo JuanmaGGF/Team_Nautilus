@@ -7,8 +7,10 @@ BARCOS = {
     'Destructor'   : (1, 4)
     }
 
+# Diccionario con menos barcos para entrenar
 # BARCOS = {
-#     'Portaaviones' : (3, 1),
+#     'Submarino'  : (2, 1),
+#     'Destructor' : (1, 1)
 #     }
 
 # Dimension del tablero: (DIMENSION_TABLERO x DIMENSION_TABLERO)
